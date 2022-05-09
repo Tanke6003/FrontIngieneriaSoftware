@@ -8,19 +8,24 @@ import { EmployeesService } from './employees.service';
 })
 export class EmployeesPage implements OnInit {
   employees : Array<any>;
+  searchData :string = "";
   constructor(private _EmployeesService: EmployeesService) {
-      this.showEmployees();
+      this.showEmployees(this.searchData);
    }
   ngOnInit() {
   }
-  showEmployees(){
-    let data ={ "employee" : ""}
+  Search($event){
+    this.searchData = $event.target.value;
+    this.showEmployees(this.searchData);
+  }
+  showEmployees(searchStr:string){
+    let data ={ "employee" : searchStr }
     this._EmployeesService.getEmployees(data).subscribe((res)=>{  
       console.log(res)
       this.employees = res;
     },(error) =>{
       console.log(error);
     });
-  }
+  } 
 
 }
