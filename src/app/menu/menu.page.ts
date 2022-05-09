@@ -8,7 +8,7 @@ import { NavController } from '@ionic/angular';
 export class MenuPage implements OnInit {
   public paginas =[
     {
-      titulo:'Employees',
+      titulo:'Empleados',
       url:'/menu/Employees',
       icon:'alert'
     }

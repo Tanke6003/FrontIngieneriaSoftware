@@ -1,9 +1,29 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Employees</ion-title>
+<ion-header >
+  <ion-toolbar >
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Empleados</ion-title>
   </ion-toolbar>
 </ion-header>
-
 <ion-content>
-
+  <ion-card>
+    <ion-grid>
+      <ion-row class="ion-justify-content-end" >
+        <ion-col size="9"><ion-input placeholder="Introduce el Nombre o id del empleado que buscas" ></ion-input></ion-col>
+        <ion-col size="3"><ion-button color="success" [routerLink]="['/add-employee']"><ion-icon name="add-circle-outline"></ion-icon> Agregar</ion-button></ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+  <ion-card>
+    <ion-grid>
+      <ion-row class="ion-justify-content-center"*ngFor="let employee of employees">
+        <ion-col>view</ion-col>
+        <ion-col>{{employee.idEmployee}}</ion-col>
+        <ion-col>{{employee.name}}</ion-col>
+        <ion-col>{{employee.rfc}}</ion-col>
+        <ion-col>{{employee.position}}</ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
 </ion-content>
