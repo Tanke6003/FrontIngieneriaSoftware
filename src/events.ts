@@ -4,9 +4,9 @@ import { Subject, Observable } from 'rxjs'
 @NgModule()
 export class Events {
 
-    noteChangeSubject: Subject<any> = new Subject();
+    employeesChangeSubject: Subject<any> = new Subject();
 
-    noteChange: Observable<any> = this.noteChangeSubject.asObservable();
+    employeesChange: Observable<any> = this.employeesChangeSubject.asObservable();
 
     constructor(){
         
