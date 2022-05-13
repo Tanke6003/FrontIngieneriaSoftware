@@ -9,6 +9,7 @@ import { EmployeesService } from './employees.service';
 export class EmployeesPage implements OnInit {
   employees : Array<any>;
   searchData :string = "";
+  message:string = "";
   constructor(private _EmployeesService: EmployeesService) {
       this.showEmployees(this.searchData);
    }
@@ -22,7 +23,8 @@ export class EmployeesPage implements OnInit {
     let data ={ "employee" : searchStr }
     this._EmployeesService.getEmployees(data).subscribe((res)=>{  
       console.log(res)
-      this.employees = res;
+      this.employees = res.Employees;
+      this.message = res.errorMessage;
     },(error) =>{
       console.log(error);
     });

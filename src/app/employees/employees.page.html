@@ -15,8 +15,10 @@
       </ion-row>
     </ion-grid>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
   </ion-card>
-  <ion-card>
-    <ion-grid>
+  <ion-card >
+    <div *ngIf = "employees;then thenBlock else elseBlock"></div>
+    <ng-template #thenBlock>
+    <ion-grid >
       <ion-row *ngFor="let employee of employees" >
         <ion-col><ion-button [routerLink]="['/view-employee/' + employee.idEmployee]">view</ion-button></ion-col>
         <ion-col>{{employee.idEmployee}}</ion-col>
@@ -25,5 +27,9 @@
         <ion-col>{{employee.position}}</ion-col>
       </ion-row>
     </ion-grid>
-  </ion-card>
+  </ng-template>
+    <ng-template #elseBlock>
+    <ion-card-content class="ion-text-center">{{message}}</ion-card-content>
+  </ng-template>
+</ion-card>
 </ion-content>

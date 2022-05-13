@@ -27,7 +27,8 @@ export class AddEmployeePage implements OnInit {
   save(){
     let data = this.addEmployeeForm.value;
     this._AddEmployeeService.saveEmployee(data).subscribe((res)=>{
-      this._NavController.navigateForward('menu/employees');
+      if(res.status)  
+        this._NavController.navigateForward('menu/employees');
     },(error) =>{
       console.log(error);
     });
