@@ -10,4 +10,7 @@ export class AddEmployeeService {
     saveEmployee(data): Observable<any> {
         return this._http.post(this.apiEndpoint + 'employees/registerEmployee',data);
     }
+    getLastId(): Observable<any> {
+        return this._http.get(this.apiEndpoint + 'employees/getLastId');
+    }
 }   

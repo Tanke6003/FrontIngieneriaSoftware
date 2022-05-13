@@ -6,6 +6,7 @@ import { Events } from 'src/events';
 import { Alerts } from 'src/alerts';
 import * as moment from 'moment';
 
+
 @Component({
   selector: 'app-add-employee',
   templateUrl: './add-employee.page.html',
@@ -14,7 +15,14 @@ import * as moment from 'moment';
 })
 export class AddEmployeePage implements OnInit {
   addEmployeeForm : FormGroup;
+  idEmployee: number;
   constructor( private _AddEmployeeService:AddEmployeeService,public _FormBuilder:FormBuilder,public _NavController:NavController,public _Events:Events,private _Alerts:Alerts) { 
+    this._AddEmployeeService.getLastId().subscribe((res)=>{
+      this.idEmployee = res.idEmployee + 1
+      console.log(this.idEmployee)
+    },(error)=>{
+      console.log(error)
+    });
     this.addEmployeeForm = this._FormBuilder.group({
       'name':new FormControl("",Validators.compose([Validators.required,Validators.pattern("^[A-Za-z ]+$")])),
       //'name':new FormControl("",Validators.required),
