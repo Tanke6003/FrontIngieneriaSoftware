@@ -16,13 +16,13 @@ export class AddEmployeePage implements OnInit {
   addEmployeeForm : FormGroup;
   constructor( private _AddEmployeeService:AddEmployeeService,public _FormBuilder:FormBuilder,public _NavController:NavController,public _Events:Events,private _Alerts:Alerts) { 
     this.addEmployeeForm = this._FormBuilder.group({
-      //'name':new FormControl("",Validators.compose([Validators.required,Validators.pattern("/^[a-z ,.'-]+$/i")]),
-      'name':new FormControl("",Validators.required),
-      'rfc':new FormControl("",Validators.required),
-      'position':new FormControl("",Validators.required),
+      'name':new FormControl("",Validators.compose([Validators.required,Validators.pattern("^[A-Za-z ]+$")])),
+      //'name':new FormControl("",Validators.required),
+      'rfc':new FormControl("",Validators.compose([Validators.required,Validators.pattern("^([A-Z]{4})+([0-9]{6})+([A-Z0-9]{3})+$")])),
+      'position':new FormControl("",Validators.compose([Validators.required,Validators.pattern("^[A-Za-z ]+$")])),
       'birthday':new FormControl("",Validators.required),
-      'phone':new FormControl("",Validators.required),
-      'salary':new FormControl("",Validators.required),
+      'phone':new FormControl("",Validators.compose([Validators.required,Validators.pattern("^[0-9]+$")])),
+      'salary':new FormControl("",Validators.compose([Validators.required,Validators.pattern("^[0-9]+$")])),
     })
   }
   ionViewWillLeave(){
@@ -36,7 +36,8 @@ export class AddEmployeePage implements OnInit {
     if(dateB.diff(dateC,'years')<18)
         console.log("-")
     if(this.addEmployeeForm.invalid)
-      return this._Alerts.presentAlert("NO SE PUDO GUARDAR","no",['ok']);
+      return this._Alerts.presentAlert("NO SE PUDO GUARDAR","no",['ok','cancel']);
+      
     let data = this.addEmployeeForm.value;
     this._AddEmployeeService.saveEmployee(data).subscribe((res)=>{  
       this._Events.employeesChangeSubject.next();
@@ -44,6 +45,6 @@ export class AddEmployeePage implements OnInit {
         this._NavController.navigateForward('menu/employees');
     },(error) =>{
       console.log(error);
-    });
+    }); 
   }
 }
