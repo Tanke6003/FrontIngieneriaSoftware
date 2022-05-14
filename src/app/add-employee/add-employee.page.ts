@@ -18,8 +18,7 @@ export class AddEmployeePage implements OnInit {
   idEmployee: number;
   constructor( private _AddEmployeeService:AddEmployeeService,public _FormBuilder:FormBuilder,public _NavController:NavController,public _Events:Events,private _Alerts:Alerts) { 
     this._AddEmployeeService.getLastId().subscribe((res)=>{
-      this.idEmployee = res.idEmployee + 1
-      console.log(this.idEmployee)
+      this.idEmployee = res.idEmployee + 1  
     },(error)=>{
       console.log(error)
     });
@@ -42,7 +41,7 @@ export class AddEmployeePage implements OnInit {
     const dateB = moment();
     const dateC = moment(this.addEmployeeForm.value.birthday);
     if(dateB.diff(dateC,'years')<18)
-        console.log("-")
+      return this._Alerts.presentAlert("No se pudo generar registro !!","La edad es menor a 18 años");
     if(this.addEmployeeForm.invalid)
       return this._Alerts.presentAlert("NO SE PUDO GUARDAR","no",['ok','cancel']);
       

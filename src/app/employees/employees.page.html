@@ -25,6 +25,13 @@
         <ion-col>{{employee.name}}</ion-col>
         <ion-col>{{employee.rfc}}</ion-col>
         <ion-col>{{employee.position}}</ion-col>
+        <div *ngIf = "employee.status;then availableBlock else notAvailableBlock"></div>
+        <ng-template #availableBlock>
+          <ion-col><ion-item color="success" shape="round"><ion-label >Activo</ion-label></ion-item></ion-col>
+        </ng-template>
+        <ng-template #notAvailableBlock>
+          <ion-col><ion-item color="danger" shape="round"><ion-label>Inactivo</ion-label></ion-item></ion-col>
+        </ng-template>
       </ion-row>
     </ion-grid>
   </ng-template>

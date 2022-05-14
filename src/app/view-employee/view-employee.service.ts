@@ -10,4 +10,7 @@ export class ViewEmployeeService {
     getEmployee(data): Observable<any> {
         return this._http.post(this.apiEndpoint + 'employees',data);
     }
+    editEmployee(data): Observable<any> {
+        return this._http.post(this.apiEndpoint + 'employees/edit',data);
+    }
 }   
