@@ -1,0 +1,43 @@
+<ion-header >
+  <ion-toolbar >
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Materias Primas</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-card >
+    <ion-grid>
+      <ion-row class="ion-justify-content-end" >
+        <ion-col size="9"><ion-input placeholder="Introduce el Nombre o id de la materia que buscas" id="search" (ionChange)="Search($event)"></ion-input></ion-col>
+        <ion-col size="3"><ion-button color="success" [routerLink]="['/add-material']"><ion-icon name="add-circle-outline"></ion-icon> Agregar</ion-button></ion-col>
+      </ion-row>
+    </ion-grid>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+  </ion-card>
+
+  <ion-card>
+    <div *ngIf = "employees;then thenBlock else elseBlock"></div>
+    <ng-template #thenBlock>
+      <ion-grid >
+        <ion-row *ngFor="let employee of employees" >
+          <ion-col><ion-button [routerLink]="['/view-employee/' + employee.idEmployee]">view</ion-button></ion-col>
+          <ion-col>{{employee.idEmployee}}</ion-col>
+          <ion-col>{{employee.name}}</ion-col>
+          <ion-col>{{employee.rfc}}</ion-col>
+          <ion-col>{{employee.position}}</ion-col>
+          <div *ngIf = "employee.status;then availableBlock else notAvailableBlock"></div>
+          <ng-template #availableBlock>
+            <ion-col><ion-item color="success" shape="round"><ion-label >Activo</ion-label></ion-item></ion-col>
+          </ng-template>
+          <ng-template #notAvailableBlock>
+            <ion-col><ion-item color="danger" shape="round"><ion-label>Inactivo</ion-label></ion-item></ion-col>
+          </ng-template>
+        </ion-row>
+      </ion-grid>
+    </ng-template>
+    <ng-template #elseBlock>
+      <ion-card-content class="ion-text-center">{{message}}</ion-card-content>
+    </ng-template>
+  </ion-card>
+</ion-content>

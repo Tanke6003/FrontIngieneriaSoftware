@@ -11,7 +11,12 @@ export class MenuPage implements OnInit {
   public paginas =[
     {
       titulo:'Empleados',
-      url:'/menu/Employees',
+      url:'/menu/employees',
+      icon:'alert'
+    },
+    {
+      titulo:'Materias Primas',
+      url:'/menu/materials',
       icon:'alert'
     }
   ];
