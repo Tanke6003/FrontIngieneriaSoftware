@@ -8,9 +8,9 @@ import { Events } from 'src/events';
   providers:[EmployeesService]
 })
 export class EmployeesPage implements OnInit {
-  employees : Array<any>;
-  searchData :string = "";
-  message:string = "";
+    employees : Array<any>;
+    searchData :string = "";
+    message:string = "";
   constructor(private _EmployeesService: EmployeesService,public _Events:Events) {
       this.showEmployees(this.searchData);
       this._Events.employeesChange.subscribe(()=>{this.showEmployees(this.searchData)});
