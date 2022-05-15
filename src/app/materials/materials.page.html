@@ -10,8 +10,8 @@
   <ion-card >
     <ion-grid>
       <ion-row class="ion-justify-content-end" >
-        <ion-col size="9"><ion-input placeholder="Introduce el Nombre o id de la materia que buscas" id="search" (ionChange)="Search($event)"></ion-input></ion-col>
-        <ion-col size="3"><ion-button color="success" [routerLink]="['/add-material']"><ion-icon name="add-circle-outline"></ion-icon> Agregar</ion-button></ion-col>
+        <ion-col size="10"><ion-input placeholder="Introduce el Nombre o id de la materia que buscas" id="search" (ionChange)="Search($event)"></ion-input></ion-col>
+        <ion-col size="2"><ion-button color="success" [routerLink]="['/add-material']"><ion-icon name="add-circle-outline"></ion-icon> Agregar</ion-button></ion-col>
       </ion-row>
     </ion-grid>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
   </ion-card>
@@ -20,18 +20,26 @@
     <div *ngIf = "materials;then thenBlock else elseBlock"></div>
     <ng-template #thenBlock>
       <ion-grid >
+        <ion-row >
+          <ion-col size="1"><h5>View</h5></ion-col>
+          <ion-col size="1"><h5>Id Materia</h5></ion-col>
+          <ion-col size="3"><h5>Nombre Materia</h5></ion-col>
+          <ion-col size="4"><h5>Descripcion</h5></ion-col>
+          <ion-col size="1"><h5>Stock</h5></ion-col>
+          <ion-col size="2"><h5>Estatus</h5></ion-col>
+        </ion-row>
         <ion-row *ngFor="let material of materials" >
-          <ion-col><ion-button [routerLink]="['/view-material/' + material.idMaterial]">view</ion-button></ion-col>
-          <ion-col>{{material.idMaterial}}</ion-col>
-          <ion-col>{{material.name}}</ion-col>
-          <ion-col>{{material.stock}}</ion-col>
-          <ion-col>{{material.description}}</ion-col>
+          <ion-col size="1"><ion-button [routerLink]="['/view-material/' + material.idMaterial]">view</ion-button></ion-col>
+          <ion-col size="1">{{material.idMaterial}}</ion-col>
+          <ion-col size="3">{{material.name}}</ion-col>
+          <ion-col size="4">{{material.description}}</ion-col>
+          <ion-col size="1">{{material.stock}}</ion-col>
           <div *ngIf = "material.available;then availableBlock else notAvailableBlock"></div>
           <ng-template #availableBlock>
-            <ion-col><ion-item color="success" shape="round"><ion-label >Activo</ion-label></ion-item></ion-col>
+            <ion-col size="2"><ion-item color="success" shape="round"><ion-label >Activo</ion-label></ion-item></ion-col>
           </ng-template>
           <ng-template #notAvailableBlock>
-            <ion-col><ion-item color="danger" shape="round"><ion-label>Inactivo</ion-label></ion-item></ion-col>
+            <ion-col size="2"><ion-item color="danger" shape="round"><ion-label>Inactivo</ion-label></ion-item></ion-col>
           </ng-template>
         </ion-row>
       </ion-grid>

@@ -1,9 +1,53 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>products</ion-title>
+<ion-header >
+  <ion-toolbar >
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Productos</ion-title>
   </ion-toolbar>
 </ion-header>
-
 <ion-content>
+  <ion-card >
+    <ion-grid>
+      <ion-row class="ion-justify-content-end" >
+        <ion-col size="10"><ion-input placeholder="Introduce el Nombre o id del producto" id="search" (ionChange)="Search($event)"></ion-input></ion-col>
+        <ion-col size="2"><ion-button color="success" [routerLink]="['/add-product']"><ion-icon name="add-circle-outline"></ion-icon>Agregar</ion-button></ion-col>
+      </ion-row>
+    </ion-grid>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+  </ion-card>
 
+  <ion-card>
+    <div *ngIf = "products;then thenBlock else elseBlock"></div>
+    <ng-template #thenBlock>
+      <ion-grid >
+        <ion-row >
+          <ion-col size="1"><h5>View</h5></ion-col>
+          <ion-col size="1"><h5>Agregar</h5></ion-col>
+          <ion-col size="1"><h5>Id Producto</h5></ion-col>
+          <ion-col size="2"><h5>Nombre Producto</h5></ion-col>
+          <ion-col size="4"><h5>Descripcion</h5></ion-col>
+          <ion-col size="1"><h5>Precio Unitario</h5></ion-col>
+          <ion-col size="2"><h5>Stock</h5></ion-col>
+        </ion-row>
+        <ion-row *ngFor="let product of products" >
+          <ion-col size="1"><ion-button [routerLink]="">view</ion-button></ion-col>
+          <ion-col size="1"><ion-button [routerLink]="" color="success">fabricacion</ion-button></ion-col>
+          <ion-col size="1">{{product.idProduct}}</ion-col>
+          <ion-col size="2">{{product.name}}</ion-col>
+          <ion-col size="4">{{product.description}}</ion-col>
+          <ion-col size="1">{{product.unitPrice}}</ion-col>
+          <div *ngIf = "product.stock > 0;then availableBlock else notAvailableBlock"></div>
+          <ng-template #availableBlock>
+            <ion-col size="2"><ion-item color="success" ><ion-label >{{product.stock}}</ion-label></ion-item></ion-col>
+          </ng-template>
+          <ng-template #notAvailableBlock>
+            <ion-col size="2"><ion-item color="danger"><ion-label>{{product.stock}}</ion-label></ion-item></ion-col>
+          </ng-template>
+        </ion-row>
+      </ion-grid>
+    </ng-template>
+    <ng-template #elseBlock>
+      <ion-card-content class="ion-text-center">{{message}}</ion-card-content>
+    </ng-template>
+  </ion-card>
 </ion-content>

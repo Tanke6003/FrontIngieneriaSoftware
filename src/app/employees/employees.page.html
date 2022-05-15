@@ -9,9 +9,9 @@
 <ion-content>
   <ion-card >
     <ion-grid>
-      <ion-row class="ion-justify-content-end" >
-        <ion-col size="9"><ion-input placeholder="Introduce el Nombre o id del empleado que buscas" id="search" (ionChange)="Search($event)"></ion-input></ion-col>
-        <ion-col size="3"><ion-button color="success" [routerLink]="['/add-employee']"><ion-icon name="add-circle-outline"></ion-icon> Agregar</ion-button></ion-col>
+      <ion-row>
+        <ion-col size="10"><ion-input placeholder="Introduce el Nombre o id del empleado que buscas" id="search" (ionChange)="Search($event)"></ion-input></ion-col>
+        <ion-col size="2"><ion-button color="success" [routerLink]="['/add-employee']"><ion-icon name="add-circle-outline"></ion-icon> Agregar</ion-button></ion-col>
       </ion-row>
     </ion-grid>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
   </ion-card>
@@ -19,18 +19,26 @@
     <div *ngIf = "employees;then thenBlock else elseBlock"></div>
     <ng-template #thenBlock>
     <ion-grid >
+      <ion-row >
+        <ion-col size="1"><h5>view</h5></ion-col>
+        <ion-col size="1"><h5>Id Empleado</h5></ion-col>
+        <ion-col size="4"><h5>Nombre Empleado</h5></ion-col>
+        <ion-col size="3"><h5>RFC</h5></ion-col>
+        <ion-col size="1"><h5>Puesto</h5></ion-col>
+        <ion-col size="2"><h5>Estatus</h5></ion-col>
+      </ion-row>
       <ion-row *ngFor="let employee of employees" >
-        <ion-col><ion-button [routerLink]="['/view-employee/' + employee.idEmployee]">view</ion-button></ion-col>
-        <ion-col>{{employee.idEmployee}}</ion-col>
-        <ion-col>{{employee.name}}</ion-col>
-        <ion-col>{{employee.rfc}}</ion-col>
-        <ion-col>{{employee.position}}</ion-col>
+        <ion-col size="1"><ion-button [routerLink]="['/view-employee/' + employee.idEmployee]">view</ion-button></ion-col>
+        <ion-col size="1">{{employee.idEmployee}}</ion-col>
+        <ion-col size="4">{{employee.name}}</ion-col>
+        <ion-col size="3">{{employee.rfc}}</ion-col>
+        <ion-col size="1">{{employee.position}}</ion-col>
         <div *ngIf = "employee.status;then availableBlock else notAvailableBlock"></div>
         <ng-template #availableBlock>
-          <ion-col><ion-item color="success" shape="round"><ion-label >Activo</ion-label></ion-item></ion-col>
+          <ion-col size="2"><ion-item color="success" shape="round"><ion-label >Activo</ion-label></ion-item></ion-col>
         </ng-template>
         <ng-template #notAvailableBlock>
-          <ion-col><ion-item color="danger" shape="round"><ion-label>Inactivo</ion-label></ion-item></ion-col>
+          <ion-col size="2"><ion-item color="danger" shape="round"><ion-label>Inactivo</ion-label></ion-item></ion-col>
         </ng-template>
       </ion-row>
     </ion-grid>
