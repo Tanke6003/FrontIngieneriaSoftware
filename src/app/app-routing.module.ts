@@ -22,9 +22,14 @@ const routes: Routes = [
   {
     path: 'view-employee/:idEmployee',
     loadChildren: () => import('./view-employee/view-employee.module').then( m => m.ViewEmployeePageModule)
-  },  {
+  },
+  {
     path: 'add-material',
     loadChildren: () => import('./add-material/add-material.module').then( m => m.AddMaterialPageModule)
+  },
+  {
+    path: 'view-material/:idMaterial',
+    loadChildren: () => import('./view-material/view-material.module').then( m => m.ViewMaterialPageModule)
   },
 
   

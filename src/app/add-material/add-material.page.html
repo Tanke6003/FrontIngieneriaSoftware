@@ -9,24 +9,24 @@
 
 <ion-content>
   <ion-card> 
-    <form  mode="md">
+    <form [formGroup]="addMaterialForm" mode="md">
       <ion-grid>
         <ion-row>
           <ion-col  size="0.7">
             <ion-item>
-              <ion-label position="stacked" style="font-size:25px;">ID: </ion-label>
+              <ion-label position="stacked" style="font-size:25px;">ID: {{idMaterial}}</ion-label>
             </ion-item>
           </ion-col>
           <ion-col size="6">
             <ion-item>
               <ion-label  position="stacked">Nombre</ion-label>
-              <ion-input placeholder="Nombre del empleado...." type="text" minlength="10" autocapitalize=on required=true ></ion-input>
+              <ion-input formControlName="name" placeholder="Nombre del empleado...." type="text" minlength="10" autocapitalize=on required=true ></ion-input>
             </ion-item>
           </ion-col>
           <ion-col size="5">
             <ion-item>
               <ion-label  position="stacked">stock</ion-label>
-              <ion-input placeholder="posicion del empleado...." type="text"minlength="3"autocapitalize="on" inputmode="text"></ion-input>
+              <ion-input formControlName="stock" placeholder="posicion del empleado...." type="text"minlength="3"autocapitalize="on" inputmode="text"></ion-input>
             </ion-item>
           </ion-col>
         </ion-row>
@@ -34,8 +34,13 @@
         <ion-col size="12">
           <ion-item>
             <ion-label position="stacked">Descripcion</ion-label>
-            <ion-textarea placeholder="Rfc del empleado...." type="text" minlength="13"maxlength="13" autocapitalize=on inputmode="text"></ion-textarea>
+            <ion-textarea formControlName="description"placeholder="Rfc del empleado...." type="text" minlength="13"autocapitalize=on inputmode="text"></ion-textarea>
           </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col >
+          <ion-button expand="block" shape="round" size="medium"  (click)="save()">Agregar Empleado</ion-button>
         </ion-col>
       </ion-row>
       </ion-grid>
