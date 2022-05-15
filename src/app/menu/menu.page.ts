@@ -18,6 +18,11 @@ export class MenuPage implements OnInit {
       titulo:'Materias Primas',
       url:'/menu/materials',
       icon:'alert'
+    },
+    {
+      titulo:'Productos',
+      url:'/menu/products',
+      icon:'alert'
     }
   ];
   selectedIndex: number;

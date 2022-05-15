@@ -1,9 +1,62 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>view-material</ion-title>
+    <ion-buttons slot="start">
+      <ion-button color="primary" [routerLink]="['/menu/materials']"><ion-icon name="arrow-back-outline"></ion-icon>Volver</ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button color="primary"(click)="editable()">edit</ion-button>
+    </ion-buttons>
+    <ion-title>Materia Prima</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-
+<ion-content >
+  <ion-card> 
+    <form [formGroup]="materialForm" mode="md">
+      <ion-grid>
+        <ion-row>
+          <ion-col  size="0.7">
+            <ion-item>
+              <ion-label position="stacked" style="font-size:25px;">ID: {{idMaterial}}</ion-label>
+            </ion-item>
+          </ion-col>
+          <ion-col size="6">
+            <ion-item>
+              <ion-label  position="stacked">Nombre</ion-label>
+              <ion-input formControlName="name" placeholder="Nombre del empleado...." type="text" minlength="10" autocapitalize=on [disabled]="edit" ></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col size="5">
+            <ion-item>
+              <ion-label position="stacked">Stock</ion-label>
+              <ion-input formControlName="stock"placeholder="Rfc del empleado...." type="text" minlength="13"maxlength="13" autocapitalize=on inputmode="text" [disabled]="edit" ></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      <ion-row>
+        <ion-col size="5">
+          <ion-item>
+            <ion-label  position="stacked">Descripcion</ion-label>
+            <ion-textarea formControlName="description"placeholder="posicion del empleado...." type="text"minlength="3"autocapitalize="on" inputmode="text" [disabled]="edit" ></ion-textarea>
+          </ion-item>
+        </ion-col>
+        <ion-col size="2.5">
+            <ion-label position="stacked">Status</ion-label>
+            <div *ngIf = "material?.available;then availableBlock else notAvailableBlock"></div>
+            <ng-template #availableBlock >
+              <ion-button color="danger" [disabled]="edit" (click)="changeStatus()">Inactivar</ion-button>
+            </ng-template>
+            <ng-template #notAvailableBlock>
+              <ion-button color="success" [disabled]="edit" (click)="changeStatus()">Activar</ion-button>
+            </ng-template>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col >
+          <ion-button expand="block" shape="round" size="medium"  (click)="save()"[disabled]="edit">guardar Material</ion-button>
+        </ion-col>
+      </ion-row>
+      </ion-grid>
+    </form>
+  </ion-card>
 </ion-content>

@@ -31,6 +31,8 @@ const routes: Routes = [
     path: 'view-material/:idMaterial',
     loadChildren: () => import('./view-material/view-material.module').then( m => m.ViewMaterialPageModule)
   },
+  
+
 
   
 

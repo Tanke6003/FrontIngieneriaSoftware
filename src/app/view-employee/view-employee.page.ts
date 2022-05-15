@@ -6,7 +6,6 @@ import { ViewEmployeeService } from './view-employee.service'
 import { Events } from 'src/events';
 import { Alerts } from 'src/alerts';
 import * as moment from 'moment';
-import { EmployeesPage } from '../employees/employees.page';
 @Component({
   selector: 'app-view-employee',
   templateUrl: './view-employee.page.html',
@@ -46,7 +45,6 @@ export class ViewEmployeePage implements OnInit {
       console.log(error);
     });
   }
-  
   editable(){
     this.edit=!this.edit
   }
@@ -76,7 +74,6 @@ export class ViewEmployeePage implements OnInit {
     let data = this.employee
     this._ViewEmployeeService.editEmployee(data).subscribe((res)=>{  
       this._Events.employeesChangeSubject.next();
-      console.log(res)
       if(res.status)  
         this._NavController.navigateForward('menu/employees');
     },(error) =>{

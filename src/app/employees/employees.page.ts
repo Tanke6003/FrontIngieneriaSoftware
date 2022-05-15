@@ -29,6 +29,5 @@ export class EmployeesPage implements OnInit {
     },(error) =>{
       console.log(error);
     });
-  } 
-
+  }
 }
