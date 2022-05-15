@@ -14,14 +14,16 @@ export class MaterialsPage implements OnInit {
   message:string = "";
   constructor(private _MaterialsService: MaterialsService,public _Events:Events) { 
     this.showMaterials(this.searchData)
+    this._Events.materialsChange.subscribe(()=>{this.showMaterials(this.searchData)});
   }
 
   ngOnInit() {
   }
   showMaterials(searchStr:string){
+    
     let data ={ "material" : searchStr }
     this._MaterialsService.getMaterials(data).subscribe((res)=>{  
-      console.log(res.Materials)
+      console.log(res.Materials[0].description)
       this.materials = res.Materials;
       this.message = res.errorMessage;
     },(error) =>{

@@ -21,11 +21,11 @@
     <ng-template #thenBlock>
       <ion-grid >
         <ion-row *ngFor="let material of materials" >
-          <ion-col><ion-button [routerLink]="">view</ion-button></ion-col>
+          <ion-col><ion-button [routerLink]="['/view-material/' + material.idMaterial]">view</ion-button></ion-col>
           <ion-col>{{material.idMaterial}}</ion-col>
           <ion-col>{{material.name}}</ion-col>
           <ion-col>{{material.stock}}</ion-col>
-          <ion-col>{{material.Descripcion}}</ion-col>
+          <ion-col>{{material.description}}</ion-col>
           <div *ngIf = "material.available;then availableBlock else notAvailableBlock"></div>
           <ng-template #availableBlock>
             <ion-col><ion-item color="success" shape="round"><ion-label >Activo</ion-label></ion-item></ion-col>

@@ -10,4 +10,7 @@ export class AddMaterialService {
     getLastId(): Observable<any> {
         return this._http.get(this.apiEndpoint + 'materials/getLastId');
     }
+    saveMaterial(data): Observable<any> {
+        return this._http.post(this.apiEndpoint + 'materials/registerMaterial',data);
+    }
 }   
