@@ -4,7 +4,7 @@ import 'rxjs';
 import { Config } from 'src/config';
 import { Observable } from 'rxjs';
 @Injectable()
-export class AddMaterialService {
+export class AddProductService {
     apiEndpoint: string;
     constructor(private _http: HttpClient, private config: Config) {this.apiEndpoint = this.config.API_MAIN;}
     getLastId(): Observable<any> {
