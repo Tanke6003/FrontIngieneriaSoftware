@@ -6,7 +6,90 @@
     <ion-title>Registar Producto</ion-title>
   </ion-toolbar>
 </ion-header>
-
 <ion-content>
-
+  <ion-card>
+    <ion-grid>
+      <form [formGroup]="addProductForm">
+        <ion-row>
+          <ion-col size="6">
+            <ion-item>
+              <ion-label  position="stacked">Nombre del Producto</ion-label>
+              <ion-input formControlName="name" placeholder="Nombre de producto.." type="text" minlength="10" autocapitalize="on" ></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item size="6">
+              <ion-label position="stacked">Descripcion del Producto</ion-label>
+              <ion-textarea formControlName="description" placeholder="Descripcion del producto..."></ion-textarea>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label  position="stacked">Precio Unitario</ion-label>
+              <ion-input formControlName="unitPrice" placeholder="Precio Unitario"minlength="2" autocapitalize="on" ></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </form>
+      <div *ngIf = "selected?.idMaterial;then isSelected else notSelected"></div>
+        <ng-template #isSelected>
+          <ion-card>
+            <ion-row>
+              <ion-col style="
+                display: flex;
+                text-align: center;
+                align-items: center;
+                align-content: center;
+                justify-content: space-evenly;
+            " size="6">{{selected.name}}</ion-col>
+              <ion-col size="4"><ion-input placeholder="cantidad necesaria" minleght="2" [(ngModel)]="quantity" (ngModelChange)="quantity"></ion-input></ion-col>
+              <ion-col size="2"><ion-button (click)="addToDetail(quantity)" color="success">ADD <ion-icon name="add-circle-outline"></ion-icon></ion-button></ion-col>
+            </ion-row>
+        </ion-card>
+        </ng-template>
+        <ng-template #notSelected>
+          <ion-row>
+            <ion-col size="2"></ion-col>
+            <ion-col size="8">
+              <ion-item>
+              <ion-input placeholder="Bucar materia" id="search" (ionChange)="Search($event)"></ion-input>
+            </ion-item>
+            </ion-col>
+            <ion-col size="2"></ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="12">
+              <ion-card>
+                <div *ngIf = "materials;then thenBlock else elseBlock"></div>
+                <ng-template #thenBlock>
+                  <ion-grid >
+                    <ion-row >
+                      <ion-col size="1"><h5>Select</h5></ion-col>
+                      <ion-col size="1"><h5>Id Materia</h5></ion-col>
+                      <ion-col size="3"><h5>Nombre Materia</h5></ion-col>
+                      <ion-col size="4"><h5>Descripcion</h5></ion-col>
+                      <ion-col size="3"><h5>Stock</h5></ion-col>
+                    </ion-row>
+                    <ion-row *ngFor="let material of materials" >
+                      <ng-template [ngIf] = "material.available">
+                      <ion-col size="1"><ion-button (click)="Select(material)">Select</ion-button></ion-col>
+                      <ion-col size="1">{{material.idMaterial}}</ion-col>
+                      <ion-col size="3">{{material.name}}</ion-col>
+                      <ion-col size="4">{{material.description}}</ion-col>
+                      <ion-col size="3">{{material.stock}}</ion-col>
+                      </ng-template>
+                    </ion-row>
+                  </ion-grid>
+                </ng-template>
+                <ng-template #elseBlock>
+                  <ion-card-content class="ion-text-center">{{message}}</ion-card-content>
+                </ng-template>
+              </ion-card>
+            </ion-col>
+          </ion-row>
+        </ng-template>
+    </ion-grid>
+  </ion-card>
 </ion-content>
