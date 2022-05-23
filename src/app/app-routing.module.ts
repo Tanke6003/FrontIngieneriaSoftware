@@ -38,6 +38,14 @@ const routes: Routes = [
     path: 'add-iva',
     loadChildren: () => import('./add-iva/add-iva.module').then( m => m.AddIvaPageModule)
   },
+  {
+    path: 'inc-stock-product',
+    loadChildren: () => import('./inc-stock-product/inc-stock-product.module').then( m => m.IncStockProductPageModule)
+  },
+  {
+    path: 'add-sell',
+    loadChildren: () => import('./add-sell/add-sell.module').then( m => m.AddSellPageModule)
+  },
 
 ];
 
