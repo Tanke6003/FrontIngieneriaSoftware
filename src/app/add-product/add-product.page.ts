@@ -96,6 +96,7 @@ export class AddProductPage implements OnInit {
       let data = this.addProductForm.value;
       data.detail = this.detail;
     this._AddProductService.saveProduct(data).subscribe((res)=>{
+      this._Events.productsChangeSubject.next();
       if(res.status)  
         this._NavController.navigateForward('menu/products');
   },(error) =>{

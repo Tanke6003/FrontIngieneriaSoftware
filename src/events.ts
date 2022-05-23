@@ -11,7 +11,10 @@ export class Events {
     materialsChangeSubject: Subject<any> = new Subject();
 
     materialsChange: Observable<any> = this.materialsChangeSubject.asObservable();
+    
+    productsChangeSubject: Subject<any> = new Subject();
 
+    productsChange: Observable<any> = this.productsChangeSubject.asObservable();
     constructor(){
         
     }

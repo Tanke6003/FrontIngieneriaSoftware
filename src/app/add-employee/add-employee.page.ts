@@ -16,6 +16,7 @@ import * as moment from 'moment';
 export class AddEmployeePage implements OnInit {
   addEmployeeForm : FormGroup;
   idEmployee: number;
+  datenow = moment().format('LLL');
   constructor( private _AddEmployeeService:AddEmployeeService,public _FormBuilder:FormBuilder,public _NavController:NavController,public _Events:Events,private _Alerts:Alerts) { 
     this._AddEmployeeService.getLastId().subscribe((res)=>{
       this.idEmployee = res.idEmployee + 1  
@@ -31,6 +32,7 @@ export class AddEmployeePage implements OnInit {
       'phone':new FormControl("",Validators.compose([Validators.required,Validators.pattern("^[0-9]+$")])),
       'salary':new FormControl("",Validators.compose([Validators.required,Validators.pattern("^[0-9]+$")])),
     })
+    setInterval(()=>this.datenow = moment().format('LLL'),30000)
   }
   ionViewWillLeave(){
     this.addEmployeeForm.reset();

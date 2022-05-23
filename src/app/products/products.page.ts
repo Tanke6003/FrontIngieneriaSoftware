@@ -13,6 +13,7 @@ export class ProductsPage implements OnInit {
   message:string = "";
   constructor(private _ProductsService:ProductsService,public _Events:Events) {
     this.showProducts(this.searchData);
+    this._Events.productsChange.subscribe(()=>{this.showProducts(this.searchData)});
   }
   ngOnInit() {
   }
