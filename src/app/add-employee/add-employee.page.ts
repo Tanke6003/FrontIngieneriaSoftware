@@ -45,7 +45,7 @@ export class AddEmployeePage implements OnInit {
     if(dateB.diff(dateC,'years')<18)
       return this._Alerts.presentAlert("No se pudo generar registro !!","La edad es menor a 18 años");
     if(this.addEmployeeForm.invalid)
-      return this._Alerts.presentAlert("NO SE PUDO GUARDAR","no",['ok','cancel']);
+      return this._Alerts.presentAlert("No se pudo generar registro !!","Uno de los campos no esta correctamente llenado");
       
     let data = this.addEmployeeForm.value;
     this._AddEmployeeService.saveEmployee(data).subscribe((res)=>{  

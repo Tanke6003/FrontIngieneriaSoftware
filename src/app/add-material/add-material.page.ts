@@ -15,6 +15,7 @@ import * as moment from 'moment';
 export class AddMaterialPage implements OnInit {
   idMaterial: number;
   addMaterialForm : FormGroup;
+  datenow = moment().format('LLL');
   constructor(private _AddMaterialService:AddMaterialService,public _FormBuilder:FormBuilder,public _NavController:NavController,public _Events:Events,private _Alerts:Alerts) { 
     this._AddMaterialService.getLastId().subscribe((res)=>{
       this.idMaterial = res.idMaterial + 1  
@@ -26,6 +27,7 @@ export class AddMaterialPage implements OnInit {
       'stock':new FormControl("",Validators.compose([Validators.required,Validators.pattern("^[0-9]+$")])),
       'description':new FormControl("",Validators.compose([Validators.required,Validators.pattern("^[A-Za-z0-9 ]+$")])),
     })
+    setInterval(()=>this.datenow = moment().format('LLL'),30000)
   }
   ngOnInit() {
   }
