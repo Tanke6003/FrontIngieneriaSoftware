@@ -30,15 +30,14 @@ const routes: Routes = [
   {
     path: 'view-material/:idMaterial',
     loadChildren: () => import('./view-material/view-material.module').then( m => m.ViewMaterialPageModule)
-  },  {
+  },
+  {
     path: 'add-product',
     loadChildren: () => import('./add-product/add-product.module').then( m => m.AddProductPageModule)
+  },  {
+    path: 'add-iva',
+    loadChildren: () => import('./add-iva/add-iva.module').then( m => m.AddIvaPageModule)
   },
-
-  
-
-
-  
 
 ];
 

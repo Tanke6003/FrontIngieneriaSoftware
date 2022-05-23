@@ -33,6 +33,21 @@
           </ion-col>
         </ion-row>
       </form>
+        <div *ngIf = "detail.length>0;then isdetail else notdetail"></div>
+        <ng-template #isdetail>
+          <ion-card>
+            <ion-grid>
+            <ion-row *ngFor="let a of detail">
+              <ion-col>{{a.name}}</ion-col>
+              <ion-col></ion-col>
+              <ion-col>{{a.quantity}}</ion-col> 
+              <ion-col><ion-button (click)="deleteToDetail(a.idMaterial)">eliminar</ion-button></ion-col> 
+            </ion-row>
+          </ion-grid>
+          </ion-card>
+        </ng-template>
+        <ng-template #notdetail>
+        </ng-template>
       <div *ngIf = "selected?.idMaterial;then isSelected else notSelected"></div>
         <ng-template #isSelected>
           <ion-card>
@@ -44,8 +59,9 @@
                 align-content: center;
                 justify-content: space-evenly;
             " size="6">{{selected.name}}</ion-col>
-              <ion-col size="4"><ion-input placeholder="cantidad necesaria" minleght="2" [(ngModel)]="quantity" (ngModelChange)="quantity"></ion-input></ion-col>
-              <ion-col size="2"><ion-button (click)="addToDetail(quantity)" color="success">ADD <ion-icon name="add-circle-outline"></ion-icon></ion-button></ion-col>
+              <ion-col size="4"><ion-input placeholder="cantidad necesaria" minleght="2" [(ngModel)]="quantity"></ion-input></ion-col>
+              <ion-col size="1"><ion-button (click)="addToDetail()" color="success">Agregar <ion-icon name="add-circle-outline"></ion-icon></ion-button></ion-col>
+              <ion-col size="1"><ion-button (click)="selected =''" color="danger">Cancelar <ion-icon name="close-circle-outline"></ion-icon></ion-button></ion-col>
             </ion-row>
         </ion-card>
         </ng-template>
@@ -90,6 +106,11 @@
             </ion-col>
           </ion-row>
         </ng-template>
+        <ion-row>
+          <ion-col size="12">
+            <ion-button (click)="save()" expand="block"> guardar registro de producto</ion-button>
+          </ion-col>
+        </ion-row>
     </ion-grid>
   </ion-card>
 </ion-content>

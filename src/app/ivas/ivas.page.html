@@ -1,0 +1,50 @@
+<ion-header >
+  <ion-toolbar >
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>IVA</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-card >
+    <ion-grid>
+      <ion-row>
+        <ion-col size="10"><ion-input placeholder="Introduce el id del Iva que buscas" id="search" (ionChange)="Search($event)"></ion-input></ion-col>
+        <ion-col size="2"><ion-button color="success" [routerLink]="['/add-iva']"><ion-icon name="add-circle-outline"></ion-icon> Agregar</ion-button></ion-col>
+      </ion-row>
+    </ion-grid>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+  </ion-card>
+  <ion-card >
+    <div *ngIf = "employees;then thenBlock else elseBlock"></div>
+    <ng-template #thenBlock>
+    <ion-grid >
+      <ion-row >
+        <ion-col size="1"><h5>view</h5></ion-col>
+        <ion-col size="1"><h5>Id Empleado</h5></ion-col>
+        <ion-col size="4"><h5>Nombre Empleado</h5></ion-col>
+        <ion-col size="3"><h5>RFC</h5></ion-col>
+        <ion-col size="1"><h5>Puesto</h5></ion-col>
+        <ion-col size="2"><h5>Estatus</h5></ion-col>
+      </ion-row>
+      <ion-row *ngFor="let employee of employees" >
+        <ion-col size="1"><ion-button [routerLink]="['/view-employee/' + employee.idEmployee]">view</ion-button></ion-col>
+        <ion-col size="1">{{employee.idEmployee}}</ion-col>
+        <ion-col size="4">{{employee.name}}</ion-col>
+        <ion-col size="3">{{employee.rfc}}</ion-col>
+        <ion-col size="1">{{employee.position}}</ion-col>
+        <div *ngIf = "employee.status;then availableBlock else notAvailableBlock"></div>
+        <ng-template #availableBlock>
+          <ion-col size="2"><ion-item color="success" shape="round"><ion-label >Activo</ion-label></ion-item></ion-col>
+        </ng-template>
+        <ng-template #notAvailableBlock>
+          <ion-col size="2"><ion-item color="danger" shape="round"><ion-label>Inactivo</ion-label></ion-item></ion-col>
+        </ng-template>
+      </ion-row>
+    </ion-grid>
+  </ng-template>
+    <ng-template #elseBlock>
+    <ion-card-content class="ion-text-center">{{message}}</ion-card-content>
+  </ng-template>
+</ion-card>
+</ion-content>

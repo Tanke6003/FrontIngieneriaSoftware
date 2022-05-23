@@ -3,7 +3,8 @@
     <ion-menu contentId="main-content" type="overlay" swipeGesture="false">
       <ion-content>
         <ion-list id="inbox-list">
-          <ion-list-header>{{datenow}} <ion-img src="src/assets/axolotech.png"></ion-img></ion-list-header>
+          <ion-list-header><ion-img src="assets/axolotech.png"></ion-img></ion-list-header>
+          <p>{{datenow}}</p>
           <ion-menu-toggle auto-hide="false" *ngFor="let pagina of paginas; let i = index">
             <ion-item (click)="changeSelectedIndex(i)" routerDirection="root" [routerLink]="[pagina.url]" lines="none"
               detail="false" [class.selected]="selectedIndex == i"> 

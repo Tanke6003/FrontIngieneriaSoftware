@@ -24,6 +24,12 @@ export class MenuPage implements OnInit {
       url:'/menu/products',
       icon:'alert'
     }
+    ,
+    {
+      titulo:'Iva',
+      url:'/menu/ivas',
+      icon:'alert'
+    }
   ];
   selectedIndex: number;
   constructor(public navCtrl:NavController,){

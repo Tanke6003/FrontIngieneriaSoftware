@@ -6,6 +6,13 @@ import { NavController } from '@ionic/angular';
 import { Events } from 'src/events';
 import { Alerts } from 'src/alerts';
 import * as moment from 'moment';
+
+interface Select{
+  idMaterial:number,
+  name:string,
+  unitPrice:number,
+  amount?:number
+}
 @Component({
   selector: 'app-add-product',
   templateUrl: './add-product.page.html',
@@ -15,12 +22,13 @@ import * as moment from 'moment';
 export class AddProductPage implements OnInit {
   idProduct: number;
   addProductForm : FormGroup;
-  Detail:Array<Object>;
+  detail:Array<Select> = [];
   materials : Array<any>;
   searchData :string = "";
   message:string = "";
-  selected:Object;
-  quantity: number = 0;
+  selected:Select;
+  quantity: number;
+
   constructor(private _AddProductService: AddProductService,private _MaterialsService:MaterialsService,public _FormBuilder:FormBuilder,public _NavController:NavController,public _Events:Events,private _Alerts:Alerts) { 
     this._AddProductService.getLastId().subscribe((res)=>{
       this.idProduct = res.idProduct + 1  
@@ -52,11 +60,46 @@ export class AddProductPage implements OnInit {
       console.log(error);
     });
   } 
+
   Select(material){
-    console.log(this.quantity)
-    this.selected=material;
+    this.selected = material;
   }
+
   addToDetail(){
-    console.log()
+    if(this.quantity==null|| this.quantity==0)
+      return this._Alerts.presentAlert("No se pudo generar registro !!","cantidad es menor o igual a 0");
+    const exist = this.detail.find((item)=>{
+      return item.idMaterial ===this.selected.idMaterial;
+    })
+    if(exist){
+      exist.amount = parseInt(exist.amount.toString()) + parseInt(this.quantity.toString());
+      return
+    }
+    this.selected.amount = this.quantity;
+    //this.detail.push(this.selected)
+    this.detail = [...this.detail,this.selected]
+    this.selected = null;
+    this.quantity = null;
+  }
+
+  deleteToDetail(idMaterial:number){
+    this.detail = this.detail.filter((item)=>{
+      return item.idMaterial != idMaterial;
+    })
+  }
+
+  save(){
+    if(this.detail.length<=0)
+      return this._Alerts.presentAlert("No se pudo generar registro !!","cantidad de materias igual a 0");
+    if(this.addProductForm.invalid)
+      return this._Alerts.presentAlert("No se pudo generar registro !!","algun campo no esta correctamente  guardado");
+      let data = this.addProductForm.value;
+      data.detail = this.detail;
+    this._AddProductService.saveProduct(data).subscribe((res)=>{
+      if(res.status)  
+        this._NavController.navigateForward('menu/products');
+  },(error) =>{
+    console.log(error);
+  });
   }
 }
