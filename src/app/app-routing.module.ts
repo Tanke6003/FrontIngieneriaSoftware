@@ -34,12 +34,13 @@ const routes: Routes = [
   {
     path: 'add-product',
     loadChildren: () => import('./add-product/add-product.module').then( m => m.AddProductPageModule)
-  },  {
+  },
+  {
     path: 'add-iva',
     loadChildren: () => import('./add-iva/add-iva.module').then( m => m.AddIvaPageModule)
   },
   {
-    path: 'inc-stock-product',
+    path: 'inc-stock-product/:idProduct',
     loadChildren: () => import('./inc-stock-product/inc-stock-product.module').then( m => m.IncStockProductPageModule)
   },
   {

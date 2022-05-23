@@ -6,7 +6,6 @@ import { Events } from 'src/events';
 import { Alerts } from 'src/alerts';
 import * as moment from 'moment';
 
-
 @Component({
   selector: 'app-add-employee',
   templateUrl: './add-employee.page.html',
